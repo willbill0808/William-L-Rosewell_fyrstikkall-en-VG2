@@ -15,6 +15,26 @@ for x in range(length):
     weights[x] = list[x][4]
     numbers[x] = x + 1
 
+
+def innit():
+    y = True
+    while y == True:
+        print(" ")
+
+        print("vil du starte simulationen, eller se på loggen, svar 1 eller 2")
+        stemmere = input("")
+        try:
+            stemmere = int(stemmere)
+            y = False
+        except:
+            print("må være et tall" )
+    
+    if stemmere == 1:
+        start()
+    else:
+        fileHandeling()
+
+
 #starten av simulationen, spør hvor mange stemmere som skal bli beregnet
 
 def start():
@@ -37,6 +57,9 @@ def start():
     stem(stemmere)
 
 #spør hvilke parti som skal bli stemt og passer på at bruker inputen er en int verdi
+
+
+
 
 def stem(stemmere):
     
@@ -133,10 +156,40 @@ def files(list):
 
     with open("demofile.txt", "a") as a:
         a.write(txt)
+    
+    innit()
 
+#om brukeren velger 2 på innit så leser den opp hele valg loggen
+
+def fileHandeling():
     print(f.read())
 
-with open("demofile.txt", "w") as w:
-    w.write("\n")
+    y = True
+    while y == True:
+        print(" ")
 
-start()
+        print("har du lyst til å slette loggen")
+        stemmere = input("")
+        try:
+            stemmere = int(stemmere)
+            y = False
+        except:
+            print("må være et tall" )
+    
+    if stemmere == 1:
+
+        with open("demofile.txt", "w") as w:
+                w.write("\n")
+
+        print("loggen ble slettet")
+        
+    else:
+        print("loggen ble ikke slettet")
+
+        innit()
+
+        
+
+    innit()
+
+innit()
