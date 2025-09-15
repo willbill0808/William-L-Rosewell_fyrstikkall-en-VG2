@@ -1,0 +1,113 @@
+import random
+
+list = [["ap", 0, 0, 0], ["sv", 0, 0, 0], ["høyre", 0, 0, 0], ["mdg", 0, 0, 0], 0]
+
+length = len(list) - 1
+
+f = open("demofile.txt", "rt")
+
+def start():
+
+    y = True
+    while y == True:
+        print(" ")
+
+        print("hvor mange skal stemme, includert deg")
+        stemmere = input("")
+        try:
+            stemmere = int(stemmere)
+            y = False
+        except:
+            print("må være et tall" )
+
+    for x in range(length):
+            txt = f"{x + 1}. {list[x][0]}"
+            print(txt)
+    stem(stemmere)
+
+def stem(stemmere):
+    
+    y = True
+
+    while y == True:
+        stemme = input("stem med tall : ")
+        try:
+            stemme = float(stemme)
+            y = False
+        except:
+            print("må være et tall.")
+
+
+    if stemme > length:
+        txt = f"dette tallet er for høyt, {length} er maxen"
+        print(txt)
+        stem(stemmere)
+
+    elif stemme <= 0:
+        txt = f"tallet må være høyere enn null"
+        print(txt)
+        stem(stemmere)
+
+    
+    stem2(stemme, stemmere)
+
+def stem2(stemme, stemmere):
+
+    for x in range(length):
+        if x + 1 == stemme:
+            list[x][1] = list[x][1] + 1
+
+
+    for x in range(stemmere -1):
+        stemme = random.randint(1,length)
+
+        for x in range(length):
+            if x + 1 == stemme:
+                list[x][1] = list[x][1] + 1
+
+
+    for x in range(length):
+        prosent = list[x][1] / stemmere * 100
+
+        list[x][2] = prosent
+        list[x][3] = round(prosent, 2)
+
+    print(list)
+    print(" ")
+    print("--------------------------------------------")
+
+    for x in range(length):
+        txt = f"{list[x][0]} fikk {list[x][1]} stemmer, det er {list[x][3]}%\n"
+        print(txt)
+
+    files(list)
+
+
+
+
+def files(list):
+
+    for x in range(length):
+
+
+        txt = f"{list[x][0]} fikk {list[x][1]} stemmere, som tilsvarer {list[x][3]}%\n"
+
+        try:
+            
+            with open("demofile.txt", "a") as a:
+                a.write(txt)
+
+
+        except:
+
+            with open("demofile.txt", "w") as w:
+                w.write(txt)
+        
+    print(f.read())
+    rangsering = sorted(range(length), key=lambda i: list[i][1])
+    print(rangsering)
+
+with open("demofile.txt", "w") as w:
+    w.write("\n")
+
+start()
