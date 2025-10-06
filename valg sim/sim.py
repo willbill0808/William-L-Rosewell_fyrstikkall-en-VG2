@@ -15,6 +15,7 @@ for x in range(length):
     weights[x] = list[x][4]
     numbers[x] = x + 1
 
+#spør om du vil se loggen eller starte en ny simulation
 
 def innit():
     y = True
