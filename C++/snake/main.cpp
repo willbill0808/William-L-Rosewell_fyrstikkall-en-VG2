@@ -1,14 +1,13 @@
-g++ -I/path/to/your/headers .cpp -o my_program
+#include "../extensions/conio.h/conio.h"
 
 #include <iostream>
-#include <conio.h>
 
 using namespace std;
 
 bool gameOver;
 
 const int width = 20;
-const int height =20;
+const int height = 20;
 int x, y, fruitX, fruitY, score;
 
 enum eDirection { STOP = 0, LEFT, RIGHT, UP, DOWN};
@@ -61,12 +60,49 @@ void draw()
 }
 void input()
 {
-    
+    if (_kbhit())
+    {
+        switch (_getche())
+        {
+        case 'a':
+            dir = LEFT;
+            break;
+        
+        case 'd':
+            dir = RIGHT;
+            break;
+        case 'w':
+            dir = UP;
+            break;
+        case 's':
+            dir = DOWN;
+            break;
+        case 'x':
+            gameOver = true;
+            break;
+        }
+    }
 }
 
 void logic()
 {
-    
+    switch (dir)
+    {
+    case LEFT:
+        x--;
+        break;
+    case RIGHT:
+        x++;
+        break;
+    case UP:
+        y--;
+        break;
+    case DOWN:
+        y++;
+        break;
+    default:
+        break;
+    }
 }
 
 int main ()
