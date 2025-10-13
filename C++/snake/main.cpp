@@ -1,6 +1,7 @@
-#include "../extensions/conio.h/conio.h"
+#include <conio.h>
 
 #include <iostream>
+#include <conio.h>
 
 using namespace std;
 
