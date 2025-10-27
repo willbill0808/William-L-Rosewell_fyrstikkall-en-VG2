@@ -1,4 +1,6 @@
 import sqlite3
+import datetime
+
 
 kobling = sqlite3.connect("butikk.db")
 
@@ -44,7 +46,8 @@ def salg():
 
     c.execute("SELECT * FROM inventar WHERE id == ?", (want))
 
-    result = c.fetchone()  
+    result = c.fetchone()
+    
     print(result)
     Navnet = result[1]
     mengde = result[3]
@@ -52,32 +55,57 @@ def salg():
     text = f"Du har {mengde} igjen av {Navnet}"
     print(text)
     fjern = int(input("hvor mange vil du fjerne: "))
+    
+    vare_id  = want
+    antall  = fjern
+    c.execute("INSERT INTO salg (vare_id, dato, antall) VALUES (?,?,?)", (vare_id, dato, antall))  
+    kobling.commit()
 
     nyMengde = mengde - fjern
 
     c.execute("UPDATE inventar SET antall = ? WHERE id = ?", (nyMengde, want))
     kobling.commit()
 
-
 def disp():
+    print("VARER")
     c.execute ("SELECT * FROM inventar")
     rows = c.fetchall()
 
     for row in rows:
         print(row)
 
+def raport():
+    c.execute("SELECT DISTINCT dato FROM salg")
+    drows = c.fetchall()
 
+    print("Datoer der et salg har blitt gjenomført")
+
+    for row in rows:
+        print(row)
+    
+    dateUse = input("hvilken dato vil du få raport fra")
+    
+
+
+
+
+
+
+x = datetime.datetime.now()
+dato = x.strftime("%x")
 
 inn = ""
 while inn != "q":
+    disp()
     print("""
 MENY
 1. Legg til vare
 2. sell en vare
 3. se hele inventar
+4. se dags raporten
 q  Avslutt
     """)
-    inn = input("hva vil du: ")
+    inn = input("Hva vil du: ")
     print("")
     if inn == "1":
         legg_til_vare()
@@ -87,3 +115,6 @@ q  Avslutt
 
     if inn == "3":
         disp()
+    
+    if inn == "4":
+        raport()
