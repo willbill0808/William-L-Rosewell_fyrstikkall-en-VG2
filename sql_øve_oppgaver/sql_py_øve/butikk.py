@@ -1,7 +1,6 @@
 import sqlite3
 import datetime
 
-
 kobling = sqlite3.connect("butikk.db")
 
 c = kobling.cursor()
@@ -80,10 +79,14 @@ def raport():
 
     print("Datoer der et salg har blitt gjenomført")
 
-    for row in rows:
+    dateList = []
+    x = 0
+    for y in rows:
+        x += 1
+        emptyList = [x, y[0]]
+        dateList.append(emptyList)
 
 
-        print(rows [row])
 
     print("")
     dateUse = input("hvilken dato vil du få raport fra: ")
