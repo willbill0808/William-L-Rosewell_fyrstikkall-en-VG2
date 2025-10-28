@@ -86,16 +86,25 @@ def raport():
         emptyList = [x, y[0]]
         dateList.append(emptyList)
 
-
+    print(dateList)
 
     print("")
     dateUse = input("hvilken dato vil du få raport fra: ")
+    dateUsed = dateList[int(dateUse)][1]
 
-    c.execute("SELECT * FROM salg WHERE dato = ?"(dateUse))
+    print(dateUsed)
+
+    c.execute("SELECT * FROM salg WHERE dato LIKE ?", (f"%{dateUsed}%",))
     rows = c.fetchall()
 
-    for row in rows:
-        print(row)
+    salgList = []
+    x = 0
+    for y in rows:
+        x += 1
+        emptyList2 = [y[0], y[1], y[2], y[3]]
+        salgList.append(emptyList2)
+        
+        print(salgList)
 
 
 
