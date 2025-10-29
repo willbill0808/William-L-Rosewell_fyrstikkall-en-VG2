@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS salg (
     vare_id TEXT NOT NULL,
     dato REAL,
     antall INTEGER NOT NULL,
-    pris REAL
+    pris REAL,
+    tittel TEXT NOT NULL
     
 )
 """)
@@ -45,7 +46,7 @@ dato3 = date3.strftime("%x")
 date4 = datetime.datetime(2025, 10, 29)
 dato4 = date4.strftime("%x")
 
-salgList = [[1, dato1, 5, 30], [3, dato2, 3, 1000], [2, dato3, 8, 45], [2, dato4, 13, 45]]
+salgList = [[1, dato1, 5, 30, "bok"], [3, dato2, 3, 1000, "pc"], [2, dato3, 8, 45, "ball"], [2, dato4, 13, 45, "ball"], [2, dato4, 16, 45, "ball"], [4, dato4, 13, 500, "tv"]]
 
 x = 0
 for x in range(len(salgList)):
@@ -53,6 +54,7 @@ for x in range(len(salgList)):
     dato = salgList[x][1]
     antall = salgList[x][2]
     pris = salgList[x][3]
+    tittel = salgList[x][4]
 
-    c.execute("INSERT INTO salg (vare_id, dato, antall, pris) VALUES (?,?,?,?)", (vare_id, dato, antall, pris))  
+    c.execute("INSERT INTO salg (vare_id, dato, antall, pris, tittel) VALUES (?,?,?,?,?)", (vare_id, dato, antall, pris, tittel))  
     kobling.commit()

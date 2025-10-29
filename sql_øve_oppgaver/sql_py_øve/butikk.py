@@ -90,7 +90,7 @@ def raport():
 
     print("")
     dateUse = input("hvilken dato vil du få raport fra: ")
-    dateUsed = dateList[int(dateUse)][1]
+    dateUsed = dateList[int(dateUse) - 1][1]
 
     print(dateUsed)
 
@@ -101,10 +101,24 @@ def raport():
     x = 0
     for y in rows:
         x += 1
-        emptyList2 = [y[0], y[1], y[2], y[3]]
+        emptyList2 = [y[0], int(y[1]), y[2], y[3], y[4]]
         salgList.append(emptyList2)
         
         print(salgList)
+        
+    print(" ")
+
+    x = 0
+    overSikt = [[salgList[0][1]]]
+    for z in salgList:
+        x =+ 1
+        
+        y = 0
+        for w in overSikt:
+            if salgList[x][1] == overSikt[y][0]:
+                overSikt[y].append(salgList[x][3]) #siste ting før looksmaxing
+
+
 
 
 
