@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS salg (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     vare_id TEXT NOT NULL,
     dato REAL,
+    pris REAL
     antall INTEGER NOT NULL
 )
 """)
@@ -30,7 +31,6 @@ def legg_til_vare():
     antall  = input("Mengde av varen:")
     c.execute("INSERT INTO inventar (tittel, pris, antall) VALUES (?,?,?)", (tittel, pris, antall))
     kobling.commit()
-
 
 def salg():
     c.execute ("SELECT * FROM inventar")
